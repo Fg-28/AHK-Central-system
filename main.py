@@ -4,11 +4,7 @@ app = Flask(__name__)
 
 @app.route("/get_script")
 def get_script():
-    return Response("""
-F1::
-MsgBox, Hello from Railway!
-Return
-""", mimetype="text/plain")
+    return Response("F1::`nMsgBox, Hello from Railway!`nReturn", mimetype="text/plain")
 
 @app.route("/")
 def home():
