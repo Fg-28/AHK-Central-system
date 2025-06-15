@@ -22,7 +22,7 @@ GetPC_GUID() {
 
 scriptName := "Trial"
 guid := GetPC_GUID()
-url := "https://script.google.com/macros/s/YOUR-GOOGLE-SCRIPT-ID/exec?script=" . scriptName . "&guid=" . guid
+url := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?script=" . scriptName . "&guid=" . guid
 password := "FG@RL1234"
 
 InputBox, p, , Enter system authorization code:, HIDE
