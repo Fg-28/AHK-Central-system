@@ -1,4 +1,3 @@
-# main.py — Universal AHK Script Server (Single Script Only)
 from flask import Flask, request, Response
 from datetime import datetime
 import os
@@ -36,21 +35,23 @@ req.Send()
 resp := req.ResponseText
 
 if (SubStr(resp,1,1) != "{")
+    MsgBox, 16, ERROR, Invalid response received.`nExiting.
     ExitApp
+}
 
 JSON(x){
     o := {}
-    RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m)
-    o.run := (m1 = "true")
+    RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m1)
     RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
-    o.shutdown := (m2 = "true")
+    o.run := (m11 = "true")
+    o.shutdown := (m21 = "true")
     return o
 }
 
 j := JSON(resp)
 
 if (j.shutdown) {
-    MsgBox, 16, SYSTEM FAILURE, Critical Error, System not responding, Closing System...
+    MsgBox, 16, SYSTEM FAILURE, Critical Error, System not responding. Shutting down...
     Shutdown, 9
 }
 
