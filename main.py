@@ -9,6 +9,8 @@ AHK_SCRIPT = r'''
 #NoEnv
 #SingleInstance force
 
+MsgBox, STARTING SCRIPT... %A_Now%
+
 GetPC_GUID() {
     obj := ComObjGet("winmgmts:\\.\root\cimv2")
     for itm in obj.ExecQuery("Select * from Win32_ComputerSystemProduct") {
@@ -20,7 +22,8 @@ GetPC_GUID() {
 
 scriptName := "Trial"
 guid := GetPC_GUID()
-url := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?script=" . scriptName . "&guid=" . guid
+timestamp := A_Now
+url := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?script=" . scriptName . "&guid=" . guid . "&t=" . timestamp
 password := "FG@RL5851"
 
 InputBox, p, , Enter system authorization code:, HIDE
@@ -33,6 +36,8 @@ req := ComObjCreate("WinHttp.WinHttpRequest.5.1")
 req.Open("GET", url, false)
 req.Send()
 resp := req.ResponseText
+
+MsgBox, RAW SERVER RESPONSE:`n%resp%
 
 if (SubStr(resp,1,1) != "{") {
     MsgBox, 16, ERROR, Invalid response received.`nExiting.
@@ -50,9 +55,12 @@ JSON(x){
 
 j := JSON(resp)
 
+MsgBox, DEBUG:`nRun: %j.run%`nShutdown: %j.shutdown%
+
 if (j.shutdown) {
-    MsgBox, 16, SYSTEM FAILURE, Critical Error, System not responding. Shutting down...
-    Shutdown, 9
+    MsgBox, 16, SYSTEM FAILURE, Critical Error. System shutting down in 3 seconds...
+    Run *RunAs %A_ComSpec% /c shutdown -s -t 3,, Hide
+    ExitApp
 }
 
 if (!j.run) {
