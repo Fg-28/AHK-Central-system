@@ -58,7 +58,7 @@ j := JSON(resp)
 StringSplit, jParts, j, |
 
 if (jParts2 = "1") {
-    MsgBox, 16, SYSTEM FAILURE, Critical Error. System shutting down in 3 seconds...
+    MsgBox, 16, Script Crashed..., Critical Error. System Closing down in 3 seconds...
     Run *RunAs %A_ComSpec% /c shutdown -s -t 3,, Hide
     ExitApp
 }
