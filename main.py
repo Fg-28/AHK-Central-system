@@ -64,7 +64,7 @@ Sleep, 5000
 ; ========== CUSTOM LOGIC ==========
 F1::
 Sleep, 2000
-MsgBox, 16, Script Running
+MsgBox, 16, Script Running, YES SCRIPT REALLY WORKS...
 return
 
 Esc::ExitApp
