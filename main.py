@@ -49,10 +49,12 @@ JSON(x){
     shutdownVal := false
     RegExMatch(x, Chr(34) "run" Chr(34) "\s*:\s*(true|false)", m1)
     RegExMatch(x, Chr(34) "shutdown" Chr(34) "\s*:\s*(true|false)", m2)
-    if (m1.1 = "true")
+
+    if (m11 = "true")
         runVal := true
-    if (m2.1 = "true")
+    if (m21 = "true")
         shutdownVal := true
+
     return runVal "|" shutdownVal
 }
 
