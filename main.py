@@ -34,7 +34,7 @@ req.Open("GET", url, false)
 req.Send()
 resp := req.ResponseText
 
-if (SubStr(resp,1,1) != "{")
+if (SubStr(resp,1,1) != "{") {
     MsgBox, 16, ERROR, Invalid response received.`nExiting.
     ExitApp
 }
@@ -43,8 +43,8 @@ JSON(x){
     o := {}
     RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m1)
     RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
-    o.run := (m11 = "true")
-    o.shutdown := (m21 = "true")
+    o.run := (m1.1 = "true")
+    o.shutdown := (m2.1 = "true")
     return o
 }
 
