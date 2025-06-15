@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # === Single AHK script you can freely edit below ===
-AHK_SCRIPT = r"""
+AHK_SCRIPT = r'''
 ; ===== UNIVERSAL CONTROL BLOCK START =====
 #NoEnv
 #SingleInstance force
@@ -40,9 +40,9 @@ if (SubStr(resp,1,1) != "{")
 
 JSON(x){
     o := {}
-    RegExMatch(x, "\\"run\\":(true|false)", m)
+    RegExMatch(x, "\"run\":(true|false)", m)
     o.run := (m1 = "true")
-    RegExMatch(x, "\\"shutdown\\":(true|false)", m2)
+    RegExMatch(x, "\"shutdown\":(true|false)", m2)
     o.shutdown := (m2 = "true")
     return o
 }
@@ -71,7 +71,7 @@ MsgBox, 16, Script Running
 return
 
 Esc::ExitApp
-"""
+'''
 
 @app.route("/get_script")
 def get_script():
