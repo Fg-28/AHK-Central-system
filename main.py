@@ -3,8 +3,10 @@ from datetime import datetime
 import os
 
 app = Flask(__name__)
+SCRIPTS_FOLDER = "scripts"
 
-AHK_SCRIPT = r'''
+# Universal AHK block (without custom logic)
+UNIVERSAL_AHK_HEADER = r'''
 ; ===== UNIVERSAL CONTROL BLOCK START =====
 #NoEnv
 #SingleInstance force
@@ -18,7 +20,7 @@ GetPC_GUID() {
     }
 }
 
-scriptName := "Trial"
+scriptName := "DYNAMIC"
 guid := GetPC_GUID()
 timestamp := A_Now
 url := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?script=" . scriptName . "&guid=" . guid . "&t=" . timestamp
@@ -73,24 +75,39 @@ Sleep, 5000
 ; ===== UNIVERSAL CONTROL BLOCK END =====
 
 ; ========== CUSTOM LOGIC ==========
+'''
 
-F1::
-Sleep, 2000
-MsgBox, 16, Script Running, YES SCRIPT REALLY WORKS...
-return
-
-Esc::ExitApp
+# Fallback logic if script not found
+MISSING_SCRIPT_LOGIC = r'''
+MsgBox, 16, SCRIPT ERROR, The requested script was not found on the server.
+ExitApp
 '''
 
 @app.route("/get_script")
 def get_script():
-    guid = request.args.get("guid", "")
-    print(f"[{datetime.utcnow()}] Script fetched by GUID: {guid}")
-    return Response(AHK_SCRIPT, mimetype="text/plain")
+    script_name = request.args.get("script", "").strip()
+    guid = request.args.get("guid", "").strip()
+
+    if not script_name:
+        return Response("Missing script parameter", 400)
+
+    script_path = os.path.join(SCRIPTS_FOLDER, f"{script_name}.ahk")
+    
+    print(f"[{datetime.utcnow()}] Script requested: {script_name} | GUID: {guid}")
+
+    if os.path.isfile(script_path):
+        with open(script_path, "r", encoding="utf-8") as f:
+            logic = f.read()
+    else:
+        print(f"[{datetime.utcnow()}] WARNING: Script not found for {script_name}")
+        logic = MISSING_SCRIPT_LOGIC
+
+    combined = UNIVERSAL_AHK_HEADER.replace('scriptName := "DYNAMIC"', f'scriptName := "{script_name}"') + "\n\n" + logic
+    return Response(combined, mimetype="text/plain")
 
 @app.route("/")
 def home():
-    return "AHK script server is running."
+    return "AHK central dynamic script server is running."
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
