@@ -25,8 +25,10 @@ url := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBD
 password := "FG@RL5851"
 
 InputBox, p, , Enter system authorization code:, HIDE
-if (p != password)
+if (p != password) {
+    MsgBox, 16, AUTH FAILED, Credentials Incorrect. Exiting Script...
     ExitApp
+}
 
 req := ComObjCreate("WinHttp.WinHttpRequest.5.1")
 req.Open("GET", url, false)
@@ -62,6 +64,7 @@ Sleep, 5000
 ; ===== UNIVERSAL CONTROL BLOCK END =====
 
 ; ========== CUSTOM LOGIC ==========
+
 F1::
 Sleep, 2000
 MsgBox, 16, Script Running, YES SCRIPT REALLY WORKS...
