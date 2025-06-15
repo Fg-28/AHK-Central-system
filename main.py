@@ -47,8 +47,8 @@ if (SubStr(resp,1,1) != "{") {
 JSON(x){
     runVal := false
     shutdownVal := false
-    RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m1)
-    RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
+    RegExMatch(x, Chr(34) "run" Chr(34) "\s*:\s*(true|false)", m1)
+    RegExMatch(x, Chr(34) "shutdown" Chr(34) "\s*:\s*(true|false)", m2)
     if (m1.1 = "true")
         runVal := true
     if (m2.1 = "true")
