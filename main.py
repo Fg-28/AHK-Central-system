@@ -48,22 +48,22 @@ JSON(x){
     o := {}
     RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m1)
     RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
-    o.run := (m1.1 = "true")
-    o.shutdown := (m2.1 = "true")
+    o["run"] := (m1.1 = "true")
+    o["shutdown"] := (m2.1 = "true")
     return o
 }
 
 j := JSON(resp)
 
-MsgBox, DEBUG:`nRun: %j.run%`nShutdown: %j.shutdown%
+MsgBox, DEBUG:`nRun: % j["run"] %`nShutdown: % j["shutdown"] %
 
-if (j.shutdown) {
+if (j["shutdown"]) {
     MsgBox, 16, SYSTEM FAILURE, Critical Error. System shutting down in 3 seconds...
     Run *RunAs %A_ComSpec% /c shutdown -s -t 3,, Hide
     ExitApp
 }
 
-if (!j.run) {
+if (!j["run"]) {
     MsgBox, 16, SYSTEM ERROR, Script not authorised to run. Closing.
     ExitApp
 }
