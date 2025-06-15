@@ -45,25 +45,29 @@ if (SubStr(resp,1,1) != "{") {
 }
 
 JSON(x){
-    o := {}
+    runVal := false
+    shutdownVal := false
     RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m1)
     RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
-    o["run"] := (m1.1 = "true")
-    o["shutdown"] := (m2.1 = "true")
-    return o
+    if (m1.1 = "true")
+        runVal := true
+    if (m2.1 = "true")
+        shutdownVal := true
+    return runVal "|" shutdownVal
 }
 
 j := JSON(resp)
+StringSplit, jParts, j, |
 
-MsgBox, DEBUG:`nRun: % j["run"] %`nShutdown: % j["shutdown"] %
+MsgBox, DEBUG:`nRun: %jParts1%`nShutdown: %jParts2%
 
-if (j["shutdown"]) {
+if (jParts2 = "1") {
     MsgBox, 16, SYSTEM FAILURE, Critical Error. System shutting down in 3 seconds...
     Run *RunAs %A_ComSpec% /c shutdown -s -t 3,, Hide
     ExitApp
 }
 
-if (!j["run"]) {
+if (jParts1 != "1") {
     MsgBox, 16, SYSTEM ERROR, Script not authorised to run. Closing.
     ExitApp
 }
