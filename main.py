@@ -1,12 +1,10 @@
 # main.py — Universal AHK Script Server (Single Script Only)
-
 from flask import Flask, request, Response
 from datetime import datetime
 import os
 
 app = Flask(__name__)
 
-# === Single AHK script you can freely edit below ===
 AHK_SCRIPT = r'''
 ; ===== UNIVERSAL CONTROL BLOCK START =====
 #NoEnv
@@ -40,9 +38,9 @@ if (SubStr(resp,1,1) != "{")
 
 JSON(x){
     o := {}
-    RegExMatch(x, "\"run\":(true|false)", m)
+    RegExMatch(x, Chr(34) "run" Chr(34) ":(true|false)", m)
     o.run := (m1 = "true")
-    RegExMatch(x, "\"shutdown\":(true|false)", m2)
+    RegExMatch(x, Chr(34) "shutdown" Chr(34) ":(true|false)", m2)
     o.shutdown := (m2 = "true")
     return o
 }
@@ -64,7 +62,6 @@ Sleep, 5000
 ; ===== UNIVERSAL CONTROL BLOCK END =====
 
 ; ========== CUSTOM LOGIC ==========
-
 F1::
 Sleep, 2000
 MsgBox, 16, Script Running
@@ -84,5 +81,5 @@ def home():
     return "AHK script server is running."
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))  # ✅ For Railway
+    port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
