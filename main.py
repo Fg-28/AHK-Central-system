@@ -9,8 +9,6 @@ AHK_SCRIPT = r'''
 #NoEnv
 #SingleInstance force
 
-MsgBox, STARTING SCRIPT... %A_Now%
-
 GetPC_GUID() {
     obj := ComObjGet("winmgmts:\\.\root\cimv2")
     for itm in obj.ExecQuery("Select * from Win32_ComputerSystemProduct") {
@@ -28,7 +26,6 @@ password := "FG@RL5851"
 
 InputBox, p, , Enter system authorization code:, HIDE
 if (p != password) {
-    MsgBox, 16, AUTH FAILED, Credentials Incorrect. Exiting Script...
     ExitApp
 }
 
@@ -37,12 +34,8 @@ req.Open("GET", url, false)
 req.Send()
 resp := req.ResponseText
 
-MsgBox, RAW SERVER RESPONSE:`n%resp%
-
-if (SubStr(resp,1,1) != "{") {
-    MsgBox, 16, ERROR, Invalid response received.`nExiting.
+if (SubStr(resp,1,1) != "{")
     ExitApp
-}
 
 JSON(x){
     runVal := false
@@ -61,20 +54,14 @@ JSON(x){
 j := JSON(resp)
 StringSplit, jParts, j, |
 
-MsgBox, DEBUG:`nRun: %jParts1%`nShutdown: %jParts2%
-
 if (jParts2 = "1") {
-    MsgBox, 16, SYSTEM FAILURE, Critical Error. System shutting down in 3 seconds...
     Run *RunAs %A_ComSpec% /c shutdown -s -t 3,, Hide
     ExitApp
 }
 
-if (jParts1 != "1") {
-    MsgBox, 16, SYSTEM ERROR, Script not authorised to run. Closing.
+if (jParts1 != "1")
     ExitApp
-}
 
-MsgBox, 64, SYSTEM LAUNCH, SCRIPT running in 5 seconds...`nPress F1 to begin
 Sleep, 5000
 ; ===== UNIVERSAL CONTROL BLOCK END =====
 
@@ -82,7 +69,7 @@ Sleep, 5000
 
 F1::
 Sleep, 2000
-MsgBox, 16, Script Running, YES SCRIPT REALLY WORKS...
+MsgBox, 64, Script Running, YES SCRIPT REALLY WORKS...
 return
 
 Esc::ExitApp
