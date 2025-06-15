@@ -40,8 +40,10 @@ if (SubStr(resp,1,1) != "{")
 
 JSON(x){
     o := {}
-    RegExMatch(x, "\"run\":(true|false)", m), o.run := (m1 = "true")
-    RegExMatch(x, "\"shutdown\":(true|false)", m2), o.shutdown := (m2 = "true")
+    RegExMatch(x, "\"run\":(true|false)", m)
+    o.run := (m1 = "true")
+    RegExMatch(x, "\"shutdown\":(true|false)", m2)
+    o.shutdown := (m2 = "true")
     return o
 }
 j := JSON(resp)
