@@ -210,7 +210,7 @@ Loop
         response := HttpObj.ResponseText
 
         runStatus := ""
-        if RegExMatch(response, "\"run\"\s*:\s*\"([^\"]+)\"", matchRun)
+        if RegExMatch(response, Chr(34) "run" Chr(34) ": *" Chr(34) "([^" Chr(34) "]*)", matchRun)
             runStatus := matchRun1
 
         StringUpper, runStatus, runStatus
