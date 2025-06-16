@@ -21,7 +21,7 @@ Loop
     ; ... (your logic for receipts, invoice, amounts remains unchanged)
 
     ; === RUNTIME CHECK every 10 loops (ONLY "START") ===
-    if (Mod(loopCount, 10) = 0) {
+    if (Mod(loopCount, 3) = 0) {
         baseURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec"
         HttpObj := ComObjCreate("WinHttp.WinHttpRequest.5.1")
         HttpObj.Open("GET", baseURL . "?control=BAJAJ&nocache=" . A_TickCount, false)
