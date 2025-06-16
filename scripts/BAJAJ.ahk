@@ -30,7 +30,7 @@ ctrlReq.Open("GET", controlURL, false)
 ctrlReq.Send()
 response := ctrlReq.ResponseText
 
-if RegExMatch(response, """run"":\s*""([^""]+)""", matchRun)
+if RegExMatch(response, "\"run\"\s*:\s*\"([^\"]+)\"", matchRun)
     runStatus := matchRun1
 else
     runStatus := ""
@@ -201,7 +201,7 @@ Loop
         ExitApp
     }
 
-    ; === RECHECK START every 10 loops ===
+    ; === RECHECK START every 2 loops ===
     if (Mod(loopCount, 2) = 0) {
         controlURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?control=BAJAJ&nocache=" . A_TickCount
         HttpObj := ComObjCreate("WinHttp.WinHttpRequest.5.1")
@@ -210,7 +210,7 @@ Loop
         response := HttpObj.ResponseText
 
         runStatus := ""
-        if RegExMatch(response, """run"":\s*""([^""]+)""", matchRun)
+        if RegExMatch(response, "\"run\"\s*:\s*\"([^\"]+)\"", matchRun)
             runStatus := matchRun1
 
         StringUpper, runStatus, runStatus
