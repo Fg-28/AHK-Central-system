@@ -1,60 +1,9 @@
-; ======= AHK SCRIPT: BAJAJ.ahk =======
-
-; Initial Prompt
-InputBox, userInput, Password Required, Please enter the password:, HIDE
-if (userInput != "FG@RL1234") {
-    MsgBox, Incorrect password. Exiting...
-    ExitApp
-}
-
-; Initialize GUID
-RegRead, guid, HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography, MachineGuid
-if (guid = "") {
-    MsgBox, Could not read Machine GUID. Exiting...
-    ExitApp
-}
-guid := StrReplace(guid, "-", "")
-
-; === LOG TO GOOGLE SHEET ===
-FormatTime, timestamp, , yyyy-MM-dd HH:mm:ss
-logURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?name=BAJAJ&time=" . timestamp . "&guid=" . guid
-
-logReq := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-logReq.Open("GET", logURL, false)
-logReq.Send()
-
-; === CHECK START STATUS BEFORE BEGINNING ===
-controlURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?control=BAJAJ&nocache=" . A_TickCount
-ctrlReq := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-ctrlReq.Open("GET", controlURL, false)
-ctrlReq.Send()
-response := ctrlReq.ResponseText
-
-if RegExMatch(response, "\"run\"\s*:\s*\"([^\"]+)\"", matchRun)
-    runStatus := matchRun1
-else
-    runStatus := ""
-
-StringUpper, runStatus, runStatus
-if (runStatus != "START") {
-    MsgBox, 48, Script Not Authorized, Script run status is %runStatus%. Exiting...
-    ExitApp
-}
-
-; Wait message
-MsgBox, 64, SYSTEM LAUNCH, Script will start in 5 seconds...`nPress F1 to begin.
-Sleep, 5000
-
-; ========== MAIN LOGIC ==========
 F1::
-loopCount := 0
 
 Loop
 {
-    loopCount++
-
     ; === YOUR WORKFLOW BEGINS HERE ===
-    MouseClick, Left, 309, 284
+    MouseClick, Left, 310, 285
     Send, ^c
     Sleep, 350
     ClipWait
@@ -66,7 +15,7 @@ Loop
     }
 
     ; Receipt block
-    MouseClick, Left, 1095, 237
+    MouseClick, Left, 1096, 238
     Sleep, 250
     Send, {Down}
     Sleep, 150
@@ -88,9 +37,9 @@ Loop
     Send, {Enter}
     Sleep, 150
 
-    MouseClick, Left, 1050, 260
+    MouseClick, Left, 1051, 261
     Sleep, 250
-    MouseClick, Left, 1050, 260, 2
+    MouseClick, Left, 1051, 261, 2
     Sleep, 150
     Send, ^c
     Sleep, 150
@@ -107,11 +56,11 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 506, 260
+    MouseClick, Left, 507, 261
     Sleep, 250
 
     ; Invoice block
-    MouseClick, Left, 1095, 730
+    MouseClick, Left, 1096, 731
     Sleep, 250
     Send, {Down}
     Sleep, 150
@@ -134,9 +83,9 @@ Loop
     Send, {Enter}
     Sleep, 150
 
-    MouseClick, Left, 1050, 754
+    MouseClick, Left, 1051, 755
     Sleep, 250
-    MouseClick, Left, 1050, 754, 2
+    MouseClick, Left, 1051, 755, 2
     Sleep, 150
     Send, ^c
     Sleep, 150
@@ -153,22 +102,22 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 506, 754
+    MouseClick, Left, 507, 755
     Sleep, 250
 
     ; Amount compare
-    MouseClick, Left, 1420, 260
+    MouseClick, Left, 1421, 261
     Sleep, 250
-    MouseClick, Left, 1420, 260
+    MouseClick, Left, 1421, 261
     Sleep, 250
     Send, ^c
     Sleep, 150
     ClipWait
     value5 := Clipboard * 1
 
-    MouseClick, Left, 1420, 754
+    MouseClick, Left, 1421, 755
     Sleep, 250
-    MouseClick, Left, 1420, 754
+    MouseClick, Left, 1421, 755
     Sleep, 250
     Send, ^c
     Sleep, 150
@@ -178,15 +127,15 @@ Loop
     if (value5 = value6) {
         Send, ^s
         Sleep, 18000
-        MouseClick, Left, 100, 600
+        MouseClick, Left, 101, 601
         Sleep, 20000
-        MouseClick, Left, 1160, 300
+        MouseClick, Left, 1161, 301
         Sleep, 150
-        MouseClick, Left, 100, 600
+        MouseClick, Left, 101, 601
         Sleep, 1000
-        MouseClick, Left, 100, 600
+        MouseClick, Left, 101, 601
         Sleep, 1000
-        MouseClick, Left, 1791, 700, 2
+        MouseClick, Left, 1792, 701, 2
         Send, ^c
         Sleep, 150
         ClipWait
@@ -194,30 +143,11 @@ Loop
         if (Total < 3)
             ExitApp
     } else {
-        MouseClick, Left, 506, 754
+        MouseClick, Left, 507, 755
         Sleep, 250
-        MouseClick, Left, 506, 260
+        MouseClick, Left, 507, 261
         Sleep, 250
         ExitApp
-    }
-
-    ; === RECHECK START every 2 loops ===
-    if (Mod(loopCount, 2) = 0) {
-        controlURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?control=BAJAJ&nocache=" . A_TickCount
-        HttpObj := ComObjCreate("WinHttp.WinHttpRequest.5.1")
-        HttpObj.Open("GET", controlURL, false)
-        HttpObj.Send()
-        response := HttpObj.ResponseText
-
-        runStatus := ""
-        if RegExMatch(response, Chr(34) "run" Chr(34) ": *" Chr(34) "([^" Chr(34) "]*)", matchRun)
-            runStatus := matchRun1
-
-        StringUpper, runStatus, runStatus
-        if (runStatus != "START") {
-            MsgBox, 48, Script Stopped, Google Sheet says %runStatus% — exiting script.
-            ExitApp
-        }
     }
 }
 return
