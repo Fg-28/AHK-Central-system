@@ -202,7 +202,7 @@ Loop
     }
 
     ; === RECHECK START every 10 loops ===
-    if (Mod(loopCount, 10) = 0) {
+    if (Mod(loopCount, 2) = 0) {
         HttpObj := ComObjCreate("WinHttp.WinHttpRequest.5.1")
         HttpObj.Open("GET", controlURL, false)
         HttpObj.Send()
