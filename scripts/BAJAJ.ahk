@@ -203,6 +203,7 @@ Loop
 
     ; === RECHECK START every 10 loops ===
     if (Mod(loopCount, 2) = 0) {
+        controlURL := "https://script.google.com/macros/s/AKfycby_QpaF75QTHhXWxpNPmjsnylyM_8RBDGIbHT3-FygJPGLs1kikJDEkufHHe18kJ1o7vg/exec?control=BAJAJ&nocache=" . A_TickCount
         HttpObj := ComObjCreate("WinHttp.WinHttpRequest.5.1")
         HttpObj.Open("GET", controlURL, false)
         HttpObj.Send()
