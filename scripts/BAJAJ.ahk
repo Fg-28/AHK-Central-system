@@ -22,7 +22,7 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 350
+    Sleep, 450
     Send, ^c
     Sleep, 150
     ClipWait
@@ -31,7 +31,7 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 350
+    Sleep, 450
     Send, ^v
     Sleep, 150
     Send, {Enter}
@@ -67,7 +67,7 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 350
+    Sleep, 450
     Send, ^c
     Sleep, 150
     ClipWait
@@ -77,7 +77,7 @@ Loop
     Send, {Left}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 350
+    Sleep, 450
     Send, ^v
     Sleep, 150
     Send, {Enter}
