@@ -22,18 +22,18 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 450
+    Sleep, 500
     Send, ^c
-    Sleep, 150
+    Sleep, 200
     ClipWait
     text1 := Clipboard
 
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 450
+    Sleep, 500
     Send, ^v
-    Sleep, 150
+    Sleep, 200
     Send, {Enter}
     Sleep, 150
 
@@ -67,9 +67,9 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 450
+    Sleep, 500
     Send, ^c
-    Sleep, 150
+    Sleep, 200
     ClipWait
     text3 := Clipboard
     Send, {Down}
@@ -77,9 +77,9 @@ Loop
     Send, {Left}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 450
+    Sleep, 500
     Send, ^v
-    Sleep, 150
+    Sleep, 200
     Send, {Enter}
     Sleep, 150
 
@@ -88,7 +88,7 @@ Loop
     MouseClick, Left, 1051, 755, 2
     Sleep, 150
     Send, ^c
-    Sleep, 150
+    Sleep, 200
     ClipWait
     text4 := Clipboard
 
@@ -111,7 +111,7 @@ Loop
     MouseClick, Left, 1421, 261
     Sleep, 250
     Send, ^c
-    Sleep, 150
+    Sleep, 200
     ClipWait
     value5 := Clipboard * 1
 
@@ -120,7 +120,7 @@ Loop
     MouseClick, Left, 1421, 755
     Sleep, 250
     Send, ^c
-    Sleep, 150
+    Sleep, 200
     ClipWait
     value6 := Clipboard * 1
 
@@ -137,7 +137,7 @@ Loop
         Sleep, 1000
         MouseClick, Left, 1792, 701, 2
         Send, ^c
-        Sleep, 150
+        Sleep, 200
         ClipWait
         Total := Clipboard
         if (Total < 3)
