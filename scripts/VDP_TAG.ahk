@@ -5,7 +5,7 @@ SetBatchLines, -1
 CoordMode, Mouse, Screen
 CoordMode, Pixel, Screen
 CoordMode, ToolTip, Screen
-SetMouseDelay, 10
+SetMouseDelay, 40
 SetKeyDelay, 50, 50
 Sleep, 5000
 
