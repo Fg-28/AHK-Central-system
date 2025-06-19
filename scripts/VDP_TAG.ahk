@@ -1,8 +1,14 @@
+#NoEnv
 #Persistent
 #SingleInstance Force
+SetBatchLines, -1
 CoordMode, Mouse, Screen
+CoordMode, Pixel, Screen
+CoordMode, ToolTip, Screen
+SetMouseDelay, 50
 SetKeyDelay, 50, 50
 Sleep, 5000
+
 MainLoop:
 F1::
 Loop
