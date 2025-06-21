@@ -1,9 +1,19 @@
+#NoEnv
+#Persistent
+#SingleInstance Force
+SetBatchLines, -1
+CoordMode, Mouse, Screen
+CoordMode, Pixel, Screen
+CoordMode, ToolTip, Screen
+SetMouseDelay, 20
+SetKeyDelay, 50, 50
+Sleep, 5000
 F1::
 
 Loop
 {
     ; === YOUR WORKFLOW BEGINS HERE ===
-    MouseClick, Left, 311, 286
+    MouseClick, Left, 309, 284
     Send, ^c
     Sleep, 350
     ClipWait
@@ -15,14 +25,14 @@ Loop
     }
 
     ; Receipt block
-    MouseClick, Left, 1097, 239
+    MouseClick, Left, 1095, 237
     Sleep, 250
     Send, {Down}
     Sleep, 150
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 500
+    Sleep, 350
     Send, ^c
     Sleep, 200
     ClipWait
@@ -31,15 +41,15 @@ Loop
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 500
+    Sleep, 350
     Send, ^v
     Sleep, 200
     Send, {Enter}
     Sleep, 150
 
-    MouseClick, Left, 1052, 262
+    MouseClick, Left, 1050, 260
     Sleep, 250
-    MouseClick, Left, 1052, 262, 2
+    MouseClick, Left, 1050, 260, 2
     Sleep, 150
     Send, ^c
     Sleep, 150
@@ -56,18 +66,18 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 508, 262
+    MouseClick, Left, 506, 260
     Sleep, 250
 
     ; Invoice block
-    MouseClick, Left, 1097, 732
+    MouseClick, Left, 1095, 730
     Sleep, 250
     Send, {Down}
     Sleep, 150
     Send, {Tab}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 500
+    Sleep, 350
     Send, ^c
     Sleep, 200
     ClipWait
@@ -77,15 +87,15 @@ Loop
     Send, {Left}
     Sleep, 150
     Send, !{Tab}
-    Sleep, 500
+    Sleep, 350
     Send, ^v
     Sleep, 200
     Send, {Enter}
     Sleep, 150
 
-    MouseClick, Left, 1052, 756
+    MouseClick, Left, 1050, 754
     Sleep, 250
-    MouseClick, Left, 1052, 756, 2
+    MouseClick, Left, 1050, 754, 2
     Sleep, 150
     Send, ^c
     Sleep, 200
@@ -102,22 +112,22 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 508, 756
+    MouseClick, Left, 506, 754
     Sleep, 250
 
     ; Amount compare
-    MouseClick, Left, 1422, 262
+    MouseClick, Left, 1420, 260
     Sleep, 250
-    MouseClick, Left, 1422, 262
+    MouseClick, Left, 1420, 260
     Sleep, 250
     Send, ^c
     Sleep, 200
     ClipWait
     value5 := Clipboard * 1
 
-    MouseClick, Left, 1422, 756
+    MouseClick, Left, 1420, 754
     Sleep, 250
-    MouseClick, Left, 1422, 756
+    MouseClick, Left, 1420, 754
     Sleep, 250
     Send, ^c
     Sleep, 200
@@ -127,15 +137,15 @@ Loop
     if (value5 = value6) {
         Send, ^s
         Sleep, 18000
-        MouseClick, Left, 103, 602
+        MouseClick, Left, 100, 600
         Sleep, 20000
-        MouseClick, Left, 1162, 302
+        MouseClick, Left, 1160, 300
         Sleep, 150
-        MouseClick, Left, 102, 602
+        MouseClick, Left, 100, 600
         Sleep, 1000
-        MouseClick, Left, 102, 602
+        MouseClick, Left, 100, 600
         Sleep, 1000
-        MouseClick, Left, 1793, 702, 2
+        MouseClick, Left, 1790, 700, 2
         Send, ^c
         Sleep, 200
         ClipWait
@@ -143,9 +153,9 @@ Loop
         if (Total < 3)
             ExitApp
     } else {
-        MouseClick, Left, 508, 756
+        MouseClick, Left, 506, 754
         Sleep, 250
-        MouseClick, Left, 508, 262
+        MouseClick, Left, 506, 260
         Sleep, 250
         ExitApp
     }
