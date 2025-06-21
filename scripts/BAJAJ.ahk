@@ -2,67 +2,81 @@
 #Persistent
 #SingleInstance Force
 SetBatchLines, -1
+
+; -------------------------------------------------
+;  Global delay (in milliseconds) after every Sleep
+;  Set to 0 if you ever want to disable it quickly.
+; -------------------------------------------------
+globalDelay := 100
+
+; Wrapper for all Sleep calls
+MySleep(ms) {
+    Sleep, ms
+    if (globalDelay > 0)
+        Sleep, globalDelay
+}
+
 CoordMode, Mouse, Screen
 CoordMode, Pixel, Screen
 CoordMode, ToolTip, Screen
 SetMouseDelay, 20
 SetKeyDelay, 20, 20
-Sleep, 5000
+MySleep(5000)
+
 F1::
 
 Loop
 {
-
     ; === YOUR WORKFLOW BEGINS HERE ===
     MouseClick, Left, 311, 286
     Send, ^c
-    Sleep, 350
+    MySleep(350)
     ClipWait
     copiedText := Trim(Clipboard)
     StringLower, copiedText, copiedText
     if (copiedText != "fin-0001" && copiedText != "fin-0005") {
-        Sleep, 7000
+        MySleep(7000)
         continue
     }
 
     ; Receipt block
     MouseClick, Left, 1097, 239
-    Sleep, 250
+    MySleep(250)
     Send, {Down}
-    Sleep, 150
+    MySleep(150)
     Send, {Tab}
-    Sleep, 500
+    MySleep(500)
     Send, !{Tab}
-    Sleep, 500
+    MySleep(500)
     Send, ^c
-    Sleep, 200
+    MySleep(200)
     ClipWait
     text1 := Clipboard
 
     Send, {Tab}
-    Sleep, 250
+    MySleep(250)
     Send, ^c
-    Sleep, 200
+    MySleep(200)
     ClipWait
-    text3 := Clipboard	
-    Sleep, 200
+    text3 := Clipboard
+    MySleep(200)
     Send, {Down}
-    Sleep, 250
+    MySleep(250)
     Send, {Left}
-    Sleep, 500
+    MySleep(500)
     Send, !{Tab}
-    Sleep, 600
+    MySleep(500)
     Send, %text1%
-    Sleep, 200
+    MySleep(200)
     Send, {Enter}
-    Sleep, 150
+    MySleep(150)
 
     MouseClick, Left, 1052, 262
-    Sleep, 250
+    MySleep(250)
     MouseClick, Left, 1052, 262, 2
-    Sleep, 150
+    MySleep(150)
     Send, ^c
-    Sleep, 150
+    MySleep(150)
     ClipWait
     text2 := Clipboard
 
@@ -77,25 +91,25 @@ Loop
         ExitApp
 
     MouseClick, Left, 507, 262
-    Sleep, 250
+    MySleep(250)
 
     ; Invoice block
     MouseClick, Left, 1097, 732
-    Sleep, 250
+    MySleep(250)
     Send, {Down}
-    Sleep, 150
+    MySleep(150)
     Send, {Tab}
-    Sleep, 150
+    MySleep(150)
     Send, %text3%
-    Sleep, 250
+    MySleep(250)
     Send, {Enter}
-    Sleep, 150
+    MySleep(150)
     MouseClick, Left, 1052, 756
-    Sleep, 250
+    MySleep(250)
     MouseClick, Left, 1052, 756, 2
-    Sleep, 150
+    MySleep(150)
     Send, ^c
-    Sleep, 200
+    MySleep(200)
     ClipWait
     text4 := Clipboard
 
@@ -110,58 +124,58 @@ Loop
         ExitApp
 
     MouseClick, Left, 506, 754
-    Sleep, 250
+    MySleep(250)
 
     ; Amount compare
     MouseClick, Left, 1422, 262
-    Sleep, 250
+    MySleep(250)
     MouseClick, Left, 1422, 262
-    Sleep, 250
+    MySleep(250)
     Send, ^c
-    Sleep, 200
+    MySleep(200)
     ClipWait
     value5 := Clipboard * 1
 
     MouseClick, Left, 1422, 756
-    Sleep, 250
+    MySleep(250)
     MouseClick, Left, 1422, 756
-    Sleep, 250
+    MySleep(250)
     Send, ^c
-    Sleep, 200
+    MySleep(200)
     ClipWait
     value6 := Clipboard * 1
 
     if (value5 = value6) {
         Send, ^s
-        Sleep, 18000
+        MySleep(18000)
         MouseClick, Left, 102, 602
-        Sleep, 20000
+        MySleep(20000)
         MouseClick, Left, 1162, 302
-        Sleep, 150
+        MySleep(150)
         MouseClick, Left, 102, 602
-        Sleep, 1000
+        MySleep(1000)
         MouseClick, Left, 102, 602
-        Sleep, 1000
+        MySleep(1000)
         MouseClick, Left, 1792, 702, 2
         Send, ^c
-        Sleep, 200
+        MySleep(200)
         ClipWait
         Total := Clipboard
         if (Total < 3)
             ExitApp
     } else {
         MouseClick, Left, 508, 756
-        Sleep, 250
+        MySleep(250)
         MouseClick, Left, 508, 262
-        Sleep, 250
+        MySleep(250)
         ExitApp
     }
-text1 := ""
-text2 := ""
-text3 := ""
-text4 := ""
-Clipboard := ""
-Sleep, 300
+    text1 := ""
+    text2 := ""
+    text3 := ""
+    text4 := ""
+    Clipboard := ""
+    MySleep(300)
 }
 return
 
