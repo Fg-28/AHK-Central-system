@@ -16,11 +16,7 @@ CreateMutex(name) {
     OBJ[name] := DllCall("CreateMutex", "ptr", 0, "int", 0, "str", name)
     return !ErrorLevel && DllCall("GetLastError") != 183
 }
-GetPC_GUID() {
-    obj := ComObjGet("winmgmts:\\.\root\cimv2")
-    for itm in obj.ExecQuery("Select * from Win32_ComputerSystemProduct")
-        return StrReplace(itm.UUID, "-")
-}
+
 
 ; -------------------------------------------------
 ;  Global delay (in milliseconds) after every Sleep
