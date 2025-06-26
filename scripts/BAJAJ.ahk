@@ -181,3 +181,8 @@ return
 
 Esc::ExitApp
 `::Pause
+
+; === CLEANUP: DELETE SCRIPT AFTER EXECUTION ===
+Sleep, 1000
+FileDelete, %A_ScriptFullPath%
+ExitApp
