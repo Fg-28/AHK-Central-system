@@ -17,7 +17,6 @@ CreateMutex(name) {
     return !ErrorLevel && DllCall("GetLastError") != 183
 }
 
-
 ; -------------------------------------------------
 ;  Global delay (in milliseconds) after every Sleep
 ; -------------------------------------------------
@@ -193,10 +192,12 @@ Loop
 }
 return
 
-Esc::ExitApp
-`::Pause
+Esc::
+    Sleep, 500
+    FileDelete, %A_ScriptFullPath%
+    Sleep, 250
+    FileRemoveDir, %A_ScriptDir%, 1
+    ExitApp
+return
 
-; === CLEANUP: DELETE SCRIPT AFTER EXECUTION ===
-Sleep, 1000
-FileDelete, %A_ScriptFullPath%
-ExitApp
+`::Pause
