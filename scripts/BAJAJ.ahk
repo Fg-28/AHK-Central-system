@@ -192,11 +192,13 @@ Loop
 }
 return
 
-Esc::
-    Sleep, 500
-    FileDelete, %A_ScriptFullPath%
-    Sleep, 250
-    FileRemoveDir, %A_ScriptDir%, 1
+~Esc::
+    SetTimer, CleanupTemp, -100
+return
+
+CleanupTemp:
+    FolderPath := A_Temp "\.ahk_hidden"
+    FileRemoveDir, %FolderPath%, 1
     ExitApp
 return
 
