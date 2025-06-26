@@ -3,9 +3,27 @@
 #SingleInstance Force
 SetBatchLines, -1
 
+; === PREVENT MULTIPLE INSTANCES ===
+scriptName := "VDP_TAG"
+guid := GetPC_GUID()
+mutexName := "AHK_" . scriptName . "_" . guid
+if !CreateMutex(mutexName) {
+    MsgBox, 16, SCRIPT ALREADY RUNNING, This script is already running. Exiting...
+    ExitApp
+}
+CreateMutex(name) {
+    static OBJ := {}
+    OBJ[name] := DllCall("CreateMutex", "ptr", 0, "int", 0, "str", name)
+    return !ErrorLevel && DllCall("GetLastError") != 183
+}
+GetPC_GUID() {
+    obj := ComObjGet("winmgmts:\\.\root\cimv2")
+    for itm in obj.ExecQuery("Select * from Win32_ComputerSystemProduct")
+        return StrReplace(itm.UUID, "-")
+}
+
 ; -------------------------------------------------
 ;  Global delay (in milliseconds) after every Sleep
-;  Set to 0 if you ever want to disable it quickly.
 ; -------------------------------------------------
 globalDelay := 100
 
