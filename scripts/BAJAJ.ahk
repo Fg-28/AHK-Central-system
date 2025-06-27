@@ -32,8 +32,8 @@ MySleep(ms) {
 CoordMode, Mouse, Screen
 CoordMode, Pixel, Screen
 CoordMode, ToolTip, Screen
-SetMouseDelay, 25
-SetKeyDelay, 25, 25
+SetMouseDelay, 22
+SetKeyDelay, 22, 22
 MySleep(5000)
 
 F1::
