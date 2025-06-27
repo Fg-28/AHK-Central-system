@@ -2,7 +2,11 @@
 #Persistent
 #SingleInstance Force
 SetBatchLines, -1
-
+CoordMode, Mouse, Screen
+CoordMode, Pixel, Screen
+CoordMode, ToolTip, Screen
+SetMouseDelay, 25
+SetKeyDelay, 25, 25
 ; === PREVENT MULTIPLE INSTANCES ===
 scriptName := "VDP_TAG"
 guid := GetPC_GUID()
