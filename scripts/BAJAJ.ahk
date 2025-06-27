@@ -2,11 +2,7 @@
 #Persistent
 #SingleInstance Force
 SetBatchLines, -1
-CoordMode, Mouse, Screen
-CoordMode, Pixel, Screen
-CoordMode, ToolTip, Screen
-SetMouseDelay, 25
-SetKeyDelay, 25, 25
+
 ; === PREVENT MULTIPLE INSTANCES ===
 scriptName := "VDP_TAG"
 guid := GetPC_GUID()
@@ -36,8 +32,8 @@ MySleep(ms) {
 CoordMode, Mouse, Screen
 CoordMode, Pixel, Screen
 CoordMode, ToolTip, Screen
-SetMouseDelay, 20
-SetKeyDelay, 20, 20
+SetMouseDelay, 25
+SetKeyDelay, 25, 25
 MySleep(5000)
 
 F1::
