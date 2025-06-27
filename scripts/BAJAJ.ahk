@@ -41,7 +41,7 @@ F1::
 Loop
 {
     ; === YOUR WORKFLOW BEGINS HERE ===
-    MouseClick, Left, 311, 286
+    MouseClick, Left, 309, 284
     Send, ^c
     MySleep(350)
     ClipWait
@@ -53,7 +53,7 @@ Loop
     }
 
     ; Receipt block
-    MouseClick, Left, 1097, 239
+    MouseClick, Left, 1095, 237
     MySleep(250)
     Send, {Down}
     MySleep(150)
@@ -84,9 +84,9 @@ Loop
     Send, {Enter}
     MySleep(150)
 
-    MouseClick, Left, 1052, 262
+    MouseClick, Left, 1050, 260
     MySleep(250)
-    MouseClick, Left, 1052, 262, 2
+    MouseClick, Left, 1050, 260, 2
     MySleep(150)
     Send, ^c
     MySleep(150)
@@ -103,11 +103,11 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 507, 262
+    MouseClick, Left, 505, 260
     MySleep(250)
 
     ; Invoice block
-    MouseClick, Left, 1097, 732
+    MouseClick, Left, 1095, 730
     MySleep(250)
     Send, {Down}
     MySleep(150)
@@ -117,9 +117,9 @@ Loop
     MySleep(250)
     Send, {Enter}
     MySleep(150)
-    MouseClick, Left, 1052, 756
+    MouseClick, Left, 1050, 754
     MySleep(250)
-    MouseClick, Left, 1052, 756, 2
+    MouseClick, Left, 1050, 754, 2
     MySleep(150)
     Send, ^c
     MySleep(200)
@@ -136,22 +136,22 @@ Loop
     if (NewValue != Recipt_Amount)
         ExitApp
 
-    MouseClick, Left, 506, 754
+    MouseClick, Left, 504, 752
     MySleep(250)
 
     ; Amount compare
-    MouseClick, Left, 1422, 262
+    MouseClick, Left, 1420, 260
     MySleep(250)
-    MouseClick, Left, 1422, 262
+    MouseClick, Left, 1420, 260
     MySleep(250)
     Send, ^c
     MySleep(200)
     ClipWait
     value5 := Clipboard * 1
 
-    MouseClick, Left, 1422, 756
+    MouseClick, Left, 1420, 754
     MySleep(250)
-    MouseClick, Left, 1422, 756
+    MouseClick, Left, 1420, 754
     MySleep(250)
     Send, ^c
     MySleep(200)
@@ -161,15 +161,15 @@ Loop
     if (value5 = value6) {
         Send, ^s
         MySleep(18000)
-        MouseClick, Left, 102, 602
+        MouseClick, Left, 100, 600
         MySleep(20000)
-        MouseClick, Left, 1162, 302
+        MouseClick, Left, 1160, 300
         MySleep(150)
-        MouseClick, Left, 102, 602
+        MouseClick, Left, 100, 600
         MySleep(1000)
-        MouseClick, Left, 102, 602
+        MouseClick, Left, 100, 600
         MySleep(1000)
-        MouseClick, Left, 1792, 702, 2
+        MouseClick, Left, 1790, 700, 2
         Send, ^c
         MySleep(200)
         ClipWait
@@ -177,9 +177,9 @@ Loop
         if (Total < 3)
             ExitApp
     } else {
-        MouseClick, Left, 508, 756
+        MouseClick, Left, 506, 754
         MySleep(250)
-        MouseClick, Left, 508, 262
+        MouseClick, Left, 506, 260
         MySleep(250)
         ExitApp
     }
